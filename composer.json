@@ -1,0 +1,26 @@
+{
+  "name": "retrinko/url-composer",
+  "description": "Basic URL composer",
+  "license": "Private",
+  "keywords": [
+    "URL",
+    "composer"
+  ],
+  "authors": [
+    {
+      "name": "Miguel Ángel Graña",
+      "email": "miguel.mailbox@gmail.com.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "UrlComposer\\": "src"
+    }
+  }
+}
