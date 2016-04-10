@@ -106,4 +106,18 @@ class UrlComposerTest extends PHPUnit_Framework_TestCase
         $url = $urlComposer->compose();
         $this->assertEquals($expected, $url);
     }
+
+    public function test_toString_withProperURL_returnsString()
+    {
+        $uc = new \UrlComposer\UrlComposer('http://hello.com/test/to-string');
+        $result = $uc->__toString();
+        $this->assertTrue(is_string($result));
+    }
+
+    public function test_toString_withExceptions_returnsString()
+    {
+        $uc = new \UrlComposer\UrlComposer();
+        $result = $uc->__toString();
+        $this->assertTrue(is_string($result));
+    }
 }

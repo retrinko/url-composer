@@ -444,6 +444,23 @@ class UrlComposer
 
     /**
      * @return string
+     */
+    public function __toString()
+    {
+        try
+        {
+            $url = $this->compose();
+        }
+        catch (\Exception $e)
+        {
+            $url = $e->getMessage();
+        }
+
+        return $url;
+    }
+
+    /**
+     * @return string
      * @throws UrlException
      */
     public function compose()
