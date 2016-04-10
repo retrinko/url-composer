@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class UrlComposerTest extends PHPUnit_Framework_TestCase
 {
@@ -21,37 +21,89 @@ class UrlComposerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expectedComposedUrl, $url->compose());
     }
 
+    /**
+     * @expectedException UrlComposer\Exceptions\UrlException
+     */
+    public function test_compose_withUnicodeHost_thrownsUrlException()
+    {
+        $unicode = 'http://piña.com';
+        new UrlComposer\UrlComposer($unicode);
+    }
+
+    /**
+     * @@expectedException UrlComposer\Exceptions\UrlException
+     */
+    public function test_cnstructor_withEmtyUrl_returnsValidURL()
+    {
+        $urlComposer = new UrlComposer\UrlComposer();
+        $urlComposer->compose();
+    }
+
+    public function test_compose_withPynicodeHost_returnsValidURL()
+    {
+        $punycode = 'http://'.idn_to_ascii('piña.com');
+        $expectedComposedUrl = 'http://xn--pia-8ma.com';
+        $url = new UrlComposer\UrlComposer($punycode);
+        $this->assertEquals($expectedComposedUrl, $url->compose());
+    }
+
     public function test_compose_returnsValidURL()
     {
-        $baseUlr = 'http://my-url.com/';
-        $expectedComposedUrl = 'http://my-url.com/one/two/'.urlencode('tëst');
+        $baseUlr = 'http://my-url.com?key=10&a=b#fragment';
+        $expectedComposedUrl = 'http://my-url.com/one/two/' . urlencode('tëst')
+                               . '?key=10&a=b#fragment';
 
         $url = new \UrlComposer\UrlComposer($baseUlr);
-        $url->addToUrl('one')->addToUrl('two')->addToUrl('tëst');
-        var_dump($url->compose());
+        $url->addToPath('one')->addToPath('two')->addToPath('tëst');
         $this->assertEquals($expectedComposedUrl, $url->compose());
     }
 
     /**
      * @expectedException UrlComposer\Exceptions\UrlException
      */
-    public function test_addToUrl_withBadChunck_thrownsUrlException()
+    public function test_addToPath_withBadPathPart_thrownsUrlException()
     {
         $baseUlr = 'http://my-url.com/';
-        $badChunck = 3;
+        $badPathPart = 3;
         $url = new \UrlComposer\UrlComposer($baseUlr);
-        $url->addToUrl($badChunck);
+        $url->addToPath($badPathPart);
     }
 
     /**
      * @expectedException UrlComposer\Exceptions\UrlException
      */
-    public function test_addToUrl_withEmptyString_thrownsUrlException()
+    public function test_addToPath_withEmptyString_thrownsUrlException()
     {
         $baseUlr = 'http://my-url.com/';
-        $badChunck = '';
+        $emptyPathPart = '';
         $url = new \UrlComposer\UrlComposer($baseUlr);
-        $url->addToUrl($badChunck);
+        $url->addToPath($emptyPathPart);
     }
 
+    /**
+     * @expectedException UrlComposer\Exceptions\UrlException
+     */
+    public function test_addToQuery_withEmptyQueyKey_thrownsUrlException()
+    {
+        $baseUlr = 'http://my-url.com/';
+        $badQueKey = '';
+        $url = new \UrlComposer\UrlComposer($baseUlr);
+        $url->addToQuery($badQueKey, 'value');
+    }
+
+    public function test_setters()
+    {
+        $expected = 'https://retrinko:123456@xn--pia-8ma.com:80/one/two/three?key=val#fragment';
+        $urlComposer = new UrlComposer\UrlComposer('');
+        $urlComposer->setScheme('https')
+            ->setHost('piña.com')
+            ->setUser('retrinko')
+            ->setPass('123456')
+            ->setPort(80)
+            ->setPath(['one', 'two', 'three'])
+            ->setQuery(['key'=>'val'])
+            ->setFragment('fragment');
+        $url = $urlComposer->compose();
+        $this->assertEquals($expected, $url);
+    }
 }
