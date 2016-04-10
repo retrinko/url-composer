@@ -4,12 +4,18 @@ Basic URL composer for PHP.
 
 ##  How to use it?
 
+    
+    <?php
+    
     use UrlComposer\UrlComposer;
     
     try
     {
         $urlComposer = new UrlComposer('http://my-url.com');
-        $urlComposer->addToUrl('blog')->addToQuery('id', 25);
+        $urlComposer->setUser('user')
+                    ->addToPath('blog')
+                    ->addToQuery('id', '25')
+                    ->setFragment('fragment');
         $url = $urlComposer->compose();
         printf('URL: %s' . PHP_EOL, $url);
     }
