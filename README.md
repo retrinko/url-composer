@@ -1,4 +1,4 @@
-# url-composer
+# retrinko/url-composer
 
 Basic URL composer for PHP.
 
