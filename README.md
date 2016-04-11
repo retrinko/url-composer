@@ -2,20 +2,25 @@
 
 Basic URL composer for PHP.
 
-##  How to use it?
+##  Installation
 
+Install the latest version with
+
+    $ composer require retrinko/url-composer
     
+## Dependencies
+
+This library requires the php's intl extension to work.
+
+##  Basic usage
+
     <?php
-    
     use UrlComposer\UrlComposer;
     
     try
     {
         $urlComposer = new UrlComposer('http://my-url.com');
-        $urlComposer->setUser('user')
-                    ->addToPath('blog')
-                    ->addToQuery('id', '25')
-                    ->setFragment('fragment');
+        $urlComposer->addToUrl('blog')->addToQuery('id', 25);
         $url = $urlComposer->compose();
         printf('URL: %s' . PHP_EOL, $url);
     }
