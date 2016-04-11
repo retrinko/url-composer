@@ -1,7 +1,8 @@
 {
   "name": "retrinko/url-composer",
   "description": "Basic URL composer",
-  "license": "Private",
+  "type": "library",
+  "license": "MIT",
   "keywords": [
     "URL",
     "composer"
