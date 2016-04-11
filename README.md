@@ -2,8 +2,19 @@
 
 Basic URL composer for PHP.
 
-##  How to use it?
+##  Installation
 
+Install the latest version with
+
+    $ composer require retrinko/url-composer
+    
+## Dependencies
+
+This library requires the php's intl extension to work.
+
+##  Basic usage
+
+    <?php
     use UrlComposer\UrlComposer;
     
     try
