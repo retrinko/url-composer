@@ -33,7 +33,7 @@ class UrlComposerTest extends PHPUnit_Framework_TestCase
     /**
      * @@expectedException UrlComposer\Exceptions\UrlException
      */
-    public function test_cnstructor_withEmtyUrl_returnsValidURL()
+    public function test_construct_withEmtyUrl_thrownsUrlExceptionOnComposition()
     {
         $urlComposer = new UrlComposer\UrlComposer();
         $urlComposer->compose();
