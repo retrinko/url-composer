@@ -51,7 +51,7 @@ class UrlComposer
      */
     public function __construct($url = '')
     {
-        if ('' != $url && false == filter_var($url, FILTER_VALIDATE_URL))
+        if ('' != $url && false === filter_var($url, FILTER_VALIDATE_URL))
         {
             throw new UrlException(sprintf('Invalid URL! (%s)', $url));
         }
@@ -60,7 +60,7 @@ class UrlComposer
     }
 
     /**
-     * @param $url
+     * @param string $url
      */
     protected function parseUrlString($url)
     {
@@ -353,7 +353,7 @@ class UrlComposer
     public function getPath($asString = false)
     {
         $path = $this->path;
-        if (true == $asString)
+        if (true === $asString)
         {
             $path = implode(self::PATH_SEPARATOR, $path);
         }
@@ -381,7 +381,7 @@ class UrlComposer
     public function getQuery($asString = false)
     {
         $query = $this->query;
-        if (true == $asString)
+        if (true === $asString)
         {
             $query = http_build_query($query);
         }
@@ -479,7 +479,7 @@ class UrlComposer
             $url = sprintf('%s#%s', $url, $this->getFragment());
         }
 
-        if (false == filter_var($url, FILTER_VALIDATE_URL))
+        if (false === filter_var($url, FILTER_VALIDATE_URL))
         {
             throw new UrlException(sprintf('URL composition error! Please check your data. ' .
                                            'The composition result is an invalid URL: "%s"',
