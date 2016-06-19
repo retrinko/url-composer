@@ -19,7 +19,7 @@ This library requires the php's intl extension to work.
 ##  Basic usage
 
     <?php
-    use UrlComposer\UrlComposer;
+    use Retrinko|UrlComposer\UrlComposer;
     
     try
     {

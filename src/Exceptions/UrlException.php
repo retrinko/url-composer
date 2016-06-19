@@ -1,7 +1,7 @@
 <?php
 
 
-namespace UrlComposer\Exceptions;
+namespace Retrinko\UrlComposer\Exceptions;
 
 
 class UrlException extends \Exception

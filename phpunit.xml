@@ -3,8 +3,8 @@
 
     <testsuites>
         <!-- Default test suite to run all tests -->
-        <testsuite name="All">
-            <directory suffix=".php">./tests/</directory>
+        <testsuite name="UnitTests">
+            <directory suffix=".php">./tests/unit/</directory>
         </testsuite>
     </testsuites>
 

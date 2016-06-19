@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use UrlComposer\UrlComposer;
+use Retrinko\UrlComposer\UrlComposer;
 
 try
 {

@@ -22,7 +22,8 @@
   },
   "autoload": {
     "psr-4": {
-      "UrlComposer\\": "src"
+      "Retrinko\\UrlComposer\\": "src",
+      "Retrinko\\UrlComposer\\Tests\\Unit\\": "src/test/unit"
     }
   }
 }

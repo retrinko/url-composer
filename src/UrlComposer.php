@@ -1,8 +1,8 @@
 <?php
 
-namespace UrlComposer;
+namespace Retrinko\UrlComposer;
 
-use UrlComposer\Exceptions\UrlException;
+use Retrinko\UrlComposer\Exceptions\UrlException;
 
 class UrlComposer
 {
