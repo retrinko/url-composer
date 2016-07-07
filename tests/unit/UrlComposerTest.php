@@ -23,6 +23,14 @@ class UrlComposerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedComposedUrl, $url->compose());
     }
 
+    public function test_compose_withPathAndTrailingSlashURL_returnsUrlWithoutTrailingSlash()
+    {
+        $urlwithPath = 'http://url-with-trailing-slash.com/one/two/';
+        $expectedComposedUrl = 'http://url-with-trailing-slash.com/one/two';
+        $url = new UrlComposer($urlwithPath);
+        $this->assertEquals($expectedComposedUrl, $url->compose());
+    }
+
     /**
      * @expectedException \Retrinko\UrlComposer\Exceptions\UrlException
      */
@@ -41,7 +49,7 @@ class UrlComposerTest extends \PHPUnit_Framework_TestCase
         $urlComposer->compose();
     }
 
-    public function test_compose_withPynicodeHost_returnsValidURL()
+    public function test_compose_withPunycodeHost_returnsValidURL()
     {
         $punycode = 'http://'.idn_to_ascii('piña.com');
         $expectedComposedUrl = 'http://xn--pia-8ma.com';
@@ -51,8 +59,8 @@ class UrlComposerTest extends \PHPUnit_Framework_TestCase
 
     public function test_compose_returnsValidURL()
     {
-        $baseUlr = 'http://my-url.com?key=10&a=b#fragment';
-        $expectedComposedUrl = 'http://my-url.com/one/two/' . urlencode('tëst')
+        $baseUlr = 'http://my-url.com/api/?key=10&a=b#fragment';
+        $expectedComposedUrl = 'http://my-url.com/api/one/two/' . urlencode('tëst')
                                . '?key=10&a=b#fragment';
 
         $url = new UrlComposer($baseUlr);
@@ -109,11 +117,13 @@ class UrlComposerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $url);
     }
 
-    public function test_toString_withProperURL_returnsString()
+    public function test_toString_withProperURL_returnsProperString()
     {
-        $uc = new UrlComposer('http://hello.com/test/to-string');
+        $expected = 'http://hello.com/test/to-string';
+        $uc = new UrlComposer($expected);
         $result = $uc->__toString();
         $this->assertTrue(is_string($result));
+        $this->assertEquals($expected, $result);
     }
 
     public function test_toString_withExceptions_returnsString()
