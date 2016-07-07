@@ -94,6 +94,7 @@ class UrlComposer
         $pathStr = parse_url($url, PHP_URL_PATH);
         if (!is_null($pathStr) && self::PATH_SEPARATOR != $pathStr)
         {
+            $pathStr = trim($pathStr, self::PATH_SEPARATOR);
             $this->path = explode(self::PATH_SEPARATOR, $pathStr);
         }
 
