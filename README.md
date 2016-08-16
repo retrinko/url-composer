@@ -19,12 +19,17 @@ This library requires the php's intl extension to work.
 ##  Basic usage
 
     <?php
-    use Retrinko|UrlComposer\UrlComposer;
     
+    require_once __DIR__ . '/../vendor/autoload.php';
+    
+    use Retrinko\UrlComposer\UrlComposer;
     try
     {
         $urlComposer = new UrlComposer('http://my-url.com');
-        $urlComposer->addToUrl('blog')->addToQuery('id', 25);
+        $urlComposer->setUser('user')
+                    ->addToPath('blog')
+                    ->addToQuery('id', '25')
+                    ->setFragment('fragment');
         $url = $urlComposer->compose();
         printf('URL: %s' . PHP_EOL, $url);
     }
